@@ -85,6 +85,7 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
           upperBound: 1.0,
         ),
       );
+      _controllers[i].reverse();
     }
   }
 
@@ -109,7 +110,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true,
         onTap: (value) {
-          _controllers.forEach((controller) => controller.reverse());
+          // 先重置之前选中的item动画
+          _controllers[_currentIdex].reset();
+          // 播放新选中item的动画
           _controllers[value].forward();
           setState(() {
             _currentIdex = value;
