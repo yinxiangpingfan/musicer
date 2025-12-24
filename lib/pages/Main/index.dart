@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:qqmusicstudy/pages/Home/index.dart';
+import 'package:qqmusicstudy/pages/Mine/index.dart';
+import 'package:qqmusicstudy/pages/Vedio/index.dart';
+import 'package:qqmusicstudy/pages/Search/index.dart';
+import 'package:qqmusicstudy/pages/Cummity/index.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -73,6 +78,11 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   //定义目前的底部导航
   int _currentIdex = 0;
 
+  //定义底部导航对应的页面
+  List<Widget> _getWidgets() {
+    return [HomePage(), VedioPage(), SearchPage(), CummityPage(), MinePage()];
+  }
+
   @override
   void initState() {
     super.initState();
@@ -98,8 +108,9 @@ class _MainPageState extends State<MainPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Demo Home Page')),
-      body: Text('Hello, World!'),
+      body: SafeArea(
+        child: IndexedStack(index: _currentIdex, children: _getWidgets()),
+      ),
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIdex,
